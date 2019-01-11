@@ -3,8 +3,19 @@ using namespace std;
 
 int main() {
 
-  char finalword;
-  char key[2];
+  int time = 0;
+
+  int keytime = 0;
+  cout << "請輸入密鑰字數:";
+  cin >> keytime;
+
+  int wordtime = 0;
+  cout << "請輸入文件字數:";
+  cin >> wordtime;
+
+  char finalword[wordtime];
+
+  string key;
   cout << "請輸入密鑰:";
   cin >> key;
   
@@ -12,22 +23,31 @@ int main() {
   string word;
   cin >> word;
 
-  for (int num = 0; num < 3; num++){
+  for (int num = 0; num < keytime; num++){
     if (key[num] >= 'A' && key[num] <= 'Z'){
-        key[num] -= 'A';
+      key[num] -= 'A';
       }
     else if (key[num] >= 'a' && key[num] <= 'z'){
       key[num] -= 'a';
     }
   }
 
-  for (int i = 0; i < 5; i++){
-    for (int k = 0; k < 3; k++){
-      finalword = key[k] + word[i];
-      if (k == 2){
-        k -= 2;
-      }
+  for (int i = 0; i < wordtime; i++){
+    if (time + i == keytime){
+      time -= keytime;
     }
-    cout << finalword;
+
+    finalword[i] = word[i] + key[time+i];
+
+    if (word[i] + key[time+i] > 'Z'){
+      finalword[i] -= 26;
+    }
+    else if (word[i] + key[time+i] > 'z'){
+      finalword[i] -= 26;
+    }
+
+    cout << "結果為:" << finalword[i];
+
   }
+  
 }
